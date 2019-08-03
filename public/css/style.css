@@ -12,3 +12,8 @@
 body, .main-layout{
     background: url('../img/first_bg.gif');
 }
+
+.empty-block{
+    width: 300px;
+    height: 300px;
+}

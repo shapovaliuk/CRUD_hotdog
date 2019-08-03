@@ -11,7 +11,8 @@
                 md-button.md-raised.md-primary(type='submit' v-if='!updateSubmit') Submit
                 md-button.md-raised.md-accent(v-if="updateSubmit" v-on:click='updateHotDog' ) Save change
     .md-layout-item
-        md-empty-state(md-rounded,
+        md-empty-state.empty-block(md-rounded,
+            md-size="320",
             md-icon='access_time',
             md-label='Nothing here',
             md-description="There are no hot-dogs here yet, but you can change it.",
