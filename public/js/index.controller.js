@@ -3,18 +3,16 @@ Vue.use(VueMaterial.default);
 new Vue({
     el: '#app',
 
-    data() {
-        return {
-            allHotDogs: [],
+    data:{
+        allHotDogs: [],
 
-            id: '',
-            name: '',
-            price: '',
+        id: '',
+        name: '',
+        price: '',
 
-            headers: ['Name', 'Price', 'Action'],
-            updateSubmit: false,
-            hotDogImage: '../img/hot-dog.png'
-        }
+        headers: ['Name', 'Price', 'Action'],
+        updateSubmit: false,
+        hotDogImage: '../img/hot-dog.png'
     },
 
     mounted: function () {
