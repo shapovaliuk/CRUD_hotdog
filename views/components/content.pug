@@ -11,19 +11,26 @@
                 md-button.md-raised.md-primary(type='submit' v-if='!updateSubmit') Submit
                 md-button.md-raised.md-accent(v-if="updateSubmit" v-on:click='updateHotDog' ) Save change
     .md-layout-item
-        md-card.card(md-with-hover='', v-for='(hotdog, index) in allHotDogs')
-            md-ripple
-                md-card-header
-                    md-card-header-text
-                        .md-title Hot dog № {{ index + 1 }}
-                        .md-subhead Actually, this hot dog is very tasty as many others hot-dogs
-                    md-card-media
-                        img(:src='hotDogImage', :alt='hotdog.name')
-                md-card-content
-                    span It name is: {{ hotdog.name }}, and it costs: {{ hotdog.price }} UAN
-                md-card-actions
-                    md-button.md-raised.md-primary(v-on:click="editHotDog(hotdog)") Edit
-                    md-button.md-raised.md-accent(v-on:click="deleteHotDog(hotdog)") Delete
+        md-empty-state(md-rounded,
+            md-icon='access_time',
+            md-label='Nothing here',
+            md-description="There are no hot-dogs here yet, but you can change it.",
+            v-if='!allHotDogs.length')
+
+        .items-block(v-if='allHotDogs.length')
+            md-card.card(md-with-hover='', v-for='(hotdog, index) in allHotDogs')
+                md-ripple
+                    md-card-header
+                        md-card-header-text
+                            .md-title Hot dog № {{ index + 1 }}
+                            .md-subhead Actually, this hot dog is very tasty as many others hot-dogs
+                        md-card-media
+                            img(:src='hotDogImage', :alt='hotdog.name')
+                    md-card-content
+                        span It name is: {{ hotdog.name }}, and it costs: {{ hotdog.price }} UAN
+                    md-card-actions
+                        md-button.md-raised.md-primary(v-on:click="editHotDog(hotdog)") Edit
+                        md-button.md-raised.md-accent(v-on:click="deleteHotDog(hotdog)") Delete
 
 
 

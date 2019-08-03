@@ -12,15 +12,13 @@ link(rel='stylesheet', href='https://unpkg.com/vue-material/dist/theme/default.c
 
 script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
 link(rel='stylesheet', href='css/style.css')
-style.
+body
 #app
     md-app(md-waterfall md-mode="fixed")
-        md-app-toolbar.md-primary
-            span.md-title HotDogApp
+        include components/header
         md-app-content.main-layout
             .container.md-5
                 include components/content
-
 
 script(src='https://unpkg.com/axios/dist/axios.min.js')
 script(src='https://cdn.jsdelivr.net/npm/vue' )
