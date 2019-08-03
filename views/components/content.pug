@@ -1,0 +1,29 @@
+.md-layout
+    .md-layout-item
+        form(@submit.prevent='createHotDog')
+            md-field
+                label(ref='name') Name:
+                md-input(type='text', :name='name', v-model='name', required)
+            md-field
+                label(ref='price') Price:
+                md-input(type='text', :name='price', v-model='price', required)
+            .panel-body
+                md-button.md-raised.md-primary(type='submit' v-if='!updateSubmit') Submit
+                md-button.md-raised.md-accent(v-if="updateSubmit" v-on:click='updateHotDog' ) Save change
+    .md-layout-item
+        md-card.card(md-with-hover='', v-for='(hotdog, index) in allHotDogs')
+            md-ripple
+                md-card-header
+                    md-card-header-text
+                        .md-title Hot dog № {{ index + 1 }}
+                        .md-subhead Actually, this hot dog is very tasty as many others hot-dogs
+                    md-card-media
+                        img(:src='hotDogImage', :alt='hotdog.name')
+                md-card-content
+                    span It name is: {{ hotdog.name }}, and it costs: {{ hotdog.price }} UAN
+                md-card-actions
+                    md-button.md-raised.md-primary(v-on:click="editHotDog(hotdog)") Edit
+                    md-button.md-raised.md-accent(v-on:click="deleteHotDog(hotdog)") Delete
+
+
+

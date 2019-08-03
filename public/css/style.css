@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.card{
+    margin-bottom: 10px;
+    background: url("../img/m-bg.png");
+}
+
+.main-layout{
+    background: url('../img/first_bg.gif');
+}

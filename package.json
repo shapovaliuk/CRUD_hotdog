@@ -1,0 +1,39 @@
+{
+  "name": "crud_hotdog",
+  "version": "1.0.0",
+  "description": "simple rest-api for hot-dogs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "hiddencoder",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-logger": "^3.2.1",
+    "koa-mount": "^4.0.0",
+    "koa-pug": "^3.0.0-2",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.0",
+    "mongodb": "^3.2.7",
+    "mongoose": "^5.6.5",
+    "nodemon": "^1.19.1",
+    "pug": "^2.0.4",
+    "vue": "^2.6.10",
+    "vue-swatches": "^1.0.3"
+  },
+  "devDependencies": {
+    "install": "^0.12.2",
+    "mocha": "^6.1.4",
+    "npm": "^6.9.0",
+    "start-server-and-test": "^1.9.1",
+    "supertest": "^4.0.2"
+  },
+  "engines": {
+    "node": "10.x.x"
+  }
+}
