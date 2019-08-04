@@ -57,10 +57,8 @@ new Vue({
                     name: self.name,
                     price: self.price
             }).then(function (response) {
-                console.log(response.data);
                 self.reset();
                 self.getHotDogs();
-                console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -82,15 +80,12 @@ new Vue({
                 self.updateSubmit = false;
                 self.reset();
                 self.getHotDogs();
-                console.log(self.allHotDogs);
             }).catch(err => console.log(err));
         },
 
         deleteHotDog: async function(hotdog){
             const self = this;
             const id = hotdog._id;
-            console.log("[D] - DELETED ID");
-
             axios.delete('/api/hot-dogs/' + id).then(res => {
                 let index = self.allHotDogs.indexOf(self.name);
                 self.allHotDogs.splice(index, 1);
