@@ -85,4 +85,14 @@ new Vue({
             this.allHotDogs = [];
         }
     },
+
+    computed: {
+        getAllHotDogs: function () {
+            return this.allHotDogs;
+        },
+
+        isEmpty: function () {
+            return this.allHotDogs.length === 0;
+        }
+    }
 });
