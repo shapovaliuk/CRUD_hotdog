@@ -5,7 +5,7 @@ mongoose.set('useFindAndModify', false);
 const hotDogValidator = [
     validate({
         validator: 'isLength',
-        arguments: [3, 50],
+        arguments: [1, 10],
         message: 'Name should be between 3 and 50 characters'
     }),
     validate({

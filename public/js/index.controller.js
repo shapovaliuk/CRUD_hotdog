@@ -44,7 +44,6 @@ new Vue({
             const self = this;
             self.allHotDogs = [];
             axios.get('/api/hot-dogs').then(response => {
-                console.log(response);
                 response.data.forEach(it => self.allHotDogs.push(it))
             }).catch(err => {
                 console.log(err);
@@ -89,7 +88,6 @@ new Vue({
             axios.delete('/api/hot-dogs/' + id).then(res => {
                 let index = self.allHotDogs.indexOf(self.name);
                 self.allHotDogs.splice(index, 1);
-                console.log(self.allHotDogs);
                 self.getHotDogs();
             }).catch(err => console.log(err));
         },
