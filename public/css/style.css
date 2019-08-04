@@ -9,7 +9,8 @@
     background: url("../img/m-bg.png");
 }
 
-body, .main-layout{
+body,
+.main-layout{
     background: url('../img/first_bg.gif');
 }
 
@@ -17,3 +18,9 @@ body, .main-layout{
     width: 300px;
     height: 300px;
 }
+
+.items-block{
+    margin-left: 10px;
+}
+
+

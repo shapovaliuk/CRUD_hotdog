@@ -11,15 +11,15 @@
                 md-button.md-raised.md-primary(type='submit' v-if='!updateSubmit') Submit
                 md-button.md-raised.md-accent(v-if="updateSubmit" v-on:click='updateHotDog' ) Save change
     .md-layout-item
-        md-empty-state.empty-block(md-rounded,
-            md-size="320",
-            md-icon='access_time',
-            md-label='Nothing here',
-            md-description="There are no hot-dogs here yet, but you can change it.",
-            v-if='isEmpty')
-
+        include no-items
         .items-block(v-if='!isEmpty')
-            md-card.card(md-with-hover='', v-for='(hotdog, index) in getAllHotDogs')
+            md-field
+                label(ref='name') Search (name):
+                md-input(type='text', :name='search', v-model='search')
+
+            include no-results
+
+            md-card.card(md-with-hover='', v-for='(hotdog, index) in filterHotDogs')
                 md-ripple
                     md-card-header
                         md-card-header-text

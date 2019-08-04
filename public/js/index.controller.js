@@ -3,20 +3,40 @@ Vue.use(VueMaterial.default);
 new Vue({
     el: '#app',
 
-    data:{
-        allHotDogs: [],
+    data(){
+        return {
+            allHotDogs: [],
+            id: '',
+            name: '',
+            price: '',
 
-        id: '',
-        name: '',
-        price: '',
+            headers: ['Name', 'Price', 'Action'],
+            updateSubmit: false,
+            hotDogImage: '../img/hot-dog.png',
 
-        headers: ['Name', 'Price', 'Action'],
-        updateSubmit: false,
-        hotDogImage: '../img/hot-dog.png'
+            search: '',
+
+            showSnackbar: false,
+            position: 'center',
+            duration: 4000,
+            isInfinity: false
+        }
     },
 
     mounted: function () {
         this.getHotDogs();
+    },
+
+    computed: {
+        isEmpty: function () {
+            return this.allHotDogs.length === 0;
+        },
+
+        filterHotDogs() {
+            return this.allHotDogs.filter(item => {
+                return ~item.name.indexOf(this.search) ;
+            });
+        },
     },
 
     methods: {
@@ -37,7 +57,7 @@ new Vue({
                     name: self.name,
                     price: self.price
             }).then(function (response) {
-                console.log(response);
+                console.log(response.data);
                 self.reset();
                 self.getHotDogs();
                 console.log(response.data);
@@ -83,16 +103,6 @@ new Vue({
             this.name = '';
             this.price = '';
             this.allHotDogs = [];
-        }
-    },
-
-    computed: {
-        getAllHotDogs: function () {
-            return this.allHotDogs;
-        },
-
-        isEmpty: function () {
-            return this.allHotDogs.length === 0;
         }
     }
 });
