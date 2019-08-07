@@ -3,7 +3,7 @@ Vue.use(VueMaterial.default);
 new Vue({
     el: '#app',
 
-    data(){
+    data() {
         return {
             allHotDogs: [],
             id: '',
@@ -34,7 +34,7 @@ new Vue({
 
         filterHotDogs() {
             return this.allHotDogs.filter(item => {
-                return ~item.name.indexOf(this.search) ;
+                return ~item.name.indexOf(this.search);
             });
         },
     },
@@ -45,32 +45,32 @@ new Vue({
             self.allHotDogs = [];
             axios.get('/api/hot-dogs').then(response => {
                 response.data.forEach(it => self.allHotDogs.push(it))
-            }).catch(err => {
-                console.log(err);
-            });
+            }).catch(err => console.error(err));
         },
 
         createHotDog: async function () {
             const self = this;
-            axios.post('/api/hot-dogs',{
-                    name: self.name,
-                    price: self.price
+            axios.post('/api/hot-dogs', {
+                name: self.name,
+                price: self.price
             }).then(function (response) {
-                self.reset();
-                self.getHotDogs();
-            }).catch(function (error) {
-                console.log(error);
-            });
+                if (response.data && response.data.error) {
+                    self.showSnackbar = true;
+                } else {
+                    self.reset();
+                    self.getHotDogs();
+                }
+            }).catch(err => console.error(err));
         },
 
-        editHotDog: function(hotdog) {
+        editHotDog: function (hotdog) {
             this.updateSubmit = true;
             this.id = hotdog._id;
             this.name = hotdog.name;
             this.price = hotdog.price;
         },
 
-        updateHotDog: async function(){
+        updateHotDog: async function () {
             const self = this;
             axios.put('/api/hot-dogs/' + self.id, {
                 name: self.name,
@@ -79,10 +79,10 @@ new Vue({
                 self.updateSubmit = false;
                 self.reset();
                 self.getHotDogs();
-            }).catch(err => console.log(err));
+            }).catch(err => console.error(err));
         },
 
-        deleteHotDog: async function(hotdog){
+        deleteHotDog: async function (hotdog) {
             const self = this;
             const id = hotdog._id;
             axios.delete('/api/hot-dogs/' + id).then(res => {

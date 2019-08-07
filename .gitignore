@@ -2,3 +2,7 @@
 npm-debug.log
 .DS_Store
 /.idea
+.env
+package-lock.json
+
+

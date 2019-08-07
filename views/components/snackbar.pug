@@ -1,0 +1,6 @@
+md-snackbar(:md-position='position',
+    :md-duration='isInfinity ? Infinity : duration',
+    :md-active.sync='showSnackbar',
+    md-persistent='')
+    span Wrong data types were given! Please, try to fill these fields again.
+        md-button.md-primary(@click='showSnackbar = false') Got it!
