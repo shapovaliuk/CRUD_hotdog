@@ -7,7 +7,6 @@ const bodyParser = require("koa-bodyparser");
 const logger = require('koa-logger');
 
 const app = new Koa();
-
 const pug = new Pug({
     viewPath: './views',
     basedir: './views',
@@ -17,8 +16,6 @@ const pug = new Pug({
 app.use(serve(__dirname + "/public"));
 app.use(bodyParser());
 app.use(logger());
-
-app.on('error', err => console.error('server error', err));
 
 mongoose.connect(process.env.MONGODB_URI || config.db.connectionString,
     {useNewUrlParser: true}, function(err){

@@ -14,7 +14,12 @@ new Vue({
             updateSubmit: false,
             hotDogImage: '../img/hot-dog.png',
 
-            search: ''
+            search: '',
+
+            showSnackbar: false,
+            position: 'center',
+            duration: 4000,
+            isInfinity: false
         }
     },
 
