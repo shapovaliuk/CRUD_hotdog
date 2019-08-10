@@ -4,8 +4,9 @@
   "description": "simple rest-api for hot-dogs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "lint": "eslint ./",
+    "test": "mocha --timeout 10000",
+    "start": "SET NODE_ENV=dev && nodemon app.js"
   },
   "author": "hiddencoder",
   "license": "ISC",
@@ -28,11 +29,16 @@
     "vue-swatches": "^1.0.3"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-vue": "^5.2.3",
     "install": "^0.12.2",
-    "mocha": "^6.1.4",
+    "mocha": "^6.2.0",
     "npm": "^6.9.0",
     "start-server-and-test": "^1.9.1",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "tape": "^4.11.0"
   },
   "engines": {
     "node": "10.x.x"

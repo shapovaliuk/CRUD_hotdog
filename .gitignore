@@ -1,8 +1,17 @@
+# Modules
 /node_modules
-npm-debug.log
-.DS_Store
-/.idea
-.env
 package-lock.json
+
+# Unknown
+npm-debug.log
+.env
+
+# DB store
+.DS_Store
+
+# IDEA
+/.idea
+
+
 
 

@@ -15,18 +15,15 @@ const hotDogValidator = [
     })
 ];
 
-let HotDogSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        validate: hotDogValidator
+let HotDogSchema = new mongoose.Schema(
+    {
+        name: { type: String, required: true, validate: hotDogValidator },
+        price: { type: Number, required: true }
+
     },
-    price: {
-        type: Number,
-        required: true
+    {
+        versionKey: false
     }
-});
-
-
+);
 
 module.exports = mongoose.model('HotDog', HotDogSchema);
