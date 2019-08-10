@@ -15,7 +15,19 @@ npm install ('or' npm i)
 ```
 
 ## Usage
-Type a following command to start server
+1) Type a following command to check code with eslint: 
+```bash
+eslint ./
+```
+
+2) Type a following command to run tests: 
+```bash
+npm run test
+```
+
+3) Type a following command to start server
 ```bash
 npm start
 ```
+
+
