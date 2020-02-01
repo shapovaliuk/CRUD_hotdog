@@ -22,5 +22,35 @@ body,
 .items-block{
     margin-left: 10px;
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination li a {
+    color: #ff5252;
+    width: 20px;
+    background-color: #232323;
+    border: 1px solid #000;
+}
+.pagination li a:hover {
+    color: #fb6161;
+    background-color: #101010;
+}
+.pagination li.active a {
+    color: #000;
+    background-color: blue;
+    border-color: #ff5252;
+}
+.pagination li.active a:hover {
+    color: #000;
+    background-color: #ff5252;
+    border-color: #ff5252;
+}
+.pagination li.disabled a {
+    color: #777;
+    background-color: #232323;
+    border-color: #000;
+}
 
 

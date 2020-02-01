@@ -6,12 +6,14 @@
   "scripts": {
     "lint": "eslint ./",
     "test": "mocha --timeout 10000",
-    "start": "SET NODE_ENV=dev && nodemon app.js"
+    "start": "nodemon babel-node app.js"
   },
   "author": "hiddencoder",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "axios": "^0.19.0",
+    "babel-preset-env": "^1.7.0",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.1",
@@ -29,6 +31,11 @@
     "vue-swatches": "^1.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-transform-regenerator": "^7.4.4",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "eslint": "^6.1.0",

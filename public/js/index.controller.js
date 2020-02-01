@@ -3,27 +3,27 @@ Vue.use(VueMaterial.default);
 new Vue({
     el: '#app',
 
-    data() {
-        return {
-            allHotDogs: [],
-            id: '',
-            name: '',
-            price: '',
+    data: () => ({
+        allHotDogs: [],
+        id: null,
+        name: null,
+        price: null,
 
-            headers: ['Name', 'Price', 'Action'],
-            updateSubmit: false,
-            hotDogImage: '../img/hot-dog.png',
+        headers: ['Name', 'Price', 'Action'],
+        canEdit: false,
+        hotDogImage: '../img/hot-dog.png',
 
-            search: '',
+        search: '',
 
-            showSnackbar: false,
-            position: 'center',
-            duration: 4000,
-            isInfinity: false
-        };
-    },
+        showSnackbar: false,
+        position: 'center',
+        duration: 4000,
+        isInfinity: false,
 
-    mounted: function() {
+        page: null
+    }),
+
+    created: function() {
         this.getHotDogs();
     },
 
@@ -32,71 +32,98 @@ new Vue({
             return this.allHotDogs.length === 0;
         },
 
-        filterHotDogs() {
+        filterHotDogs: function() {
             return this.allHotDogs.filter(item => {
                 return ~item.name.indexOf(this.search);
             });
+        },
+
+        saveText: function() {
+            return this.canEdit ? 'save' : 'create';
+        },
+
+        saveMethod: function() {
+            return this.canEdit ? 'put' : 'post';
+        },
+
+        saveURL: function() {
+            return this.canEdit ? `/api/hot-dogs/${this.id}` : 'api/hot-dogs';
         }
     },
 
     methods: {
-        getHotDogs: async function() {
-            const self = this;
-            self.allHotDogs = [];
-            axios.get('/api/hot-dogs').then(response => {
-                response.data.forEach(it => self.allHotDogs.push(it));
-            }).catch(err => console.error(err));
+        getHotDogs: async function(page = 1) {
+            axios({
+                method: 'get', url: '/api/hot-dogs',
+                params: {
+                    page
+                }
+            }).then(res => {
+                if (res.data) {
+                    this.allHotDogs = res.data.items;
+                    this.page = res.data.page;
+                }
+            }).catch(err => {
+                if (err.response) {
+                    console.log(err.response.message);
+                }
+            });
         },
 
-        createHotDog: async function() {
-            const self = this;
-            axios.post('/api/hot-dogs', {
-                name: self.name,
-                price: self.price
-            }).then(function(response) {
-                if (response.data && response.data.error) {
-                    self.showSnackbar = true;
-                } else {
-                    self.reset();
-                    self.getHotDogs();
-                    console.log(response);
-                }
-            }).catch(err => console.error(err));
+        changePage: async function(page) {
+            await this.getHotDogs(page);
         },
 
         editHotDog: function(hotdog) {
-            this.updateSubmit = true;
+            this.canEdit = true;
             this.id = hotdog._id;
             this.name = hotdog.name;
             this.price = hotdog.price;
         },
 
-        updateHotDog: async function() {
-            const self = this;
-            axios.put('/api/hot-dogs/' + self.id, {
-                name: self.name,
-                price: self.price
+        saveHotDog: async function() {
+            await axios({
+                method: this.saveMethod,
+                url: this.saveURL,
+                data: {
+                    name: this.name,
+                    price: this.price
+                }
             }).then(res => {
-                self.updateSubmit = false;
-                self.reset();
-                self.getHotDogs();
-            }).catch(err => console.error(err));
+                if (res.data) {
+                    this.canEdit = false;
+                    this.reset();
+                    const updateIndex = this.allHotDogs.findIndex(it => it._id === this.id);
+
+                    if (updateIndex !== -1) {
+                        return this.allHotDogs.splice(updateIndex, 1, res.data);
+                    }
+
+                    this.allHotDogs.unshift(res.data);
+                }
+            }).catch(error => {
+                if (error.response && error.response.data && error.response.data.message) {
+                    console.log(error.response.data.message);
+                }
+            });
         },
 
         deleteHotDog: async function(hotdog) {
-            const self = this;
-            const id = hotdog._id;
-            axios.delete('/api/hot-dogs/' + id).then(res => {
-                let index = self.allHotDogs.indexOf(self.name);
-                self.allHotDogs.splice(index, 1);
-                self.getHotDogs();
-            }).catch(err => console.log(err));
+            console.log(this.allHotDogs);
+            await axios({
+                method: 'delete',
+                url: `/api/hot-dogs/${hotdog._id}`
+            }).then(res => {
+                if (res.status === 204) {
+                    const removeIndex = this.allHotDogs.findIndex(it => it._id === hotdog._id);
+                    this.allHotDogs.splice(removeIndex, 1);
+                }
+            });
         },
 
         reset: function() {
             this.name = '';
             this.price = '';
-            this.allHotDogs = [];
         }
     }
 });

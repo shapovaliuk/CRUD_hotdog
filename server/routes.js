@@ -1,11 +1,12 @@
-// All routes.
+// All server.
+const pagination = require('../middleware/pagination');
 
 const Router = require('koa-router');
 const controllers = require('./controllers');
 
 const router = new Router();
 
-router.get('/api/hot-dogs', controllers.get);
+router.get('/api/hot-dogs', pagination, controllers.get);
 
 router.get('/api/hot-dogs/:id', controllers.getById);
 

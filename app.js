@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGODB_URI || config.db.connectionString,
         if (err) return console.log(err);
     });
 
-const router = require('./routes/routes');
+const router = require('./server/routes');
 app
     .use(router.routes())
     .use(router.allowedMethods());

@@ -1,6 +1,6 @@
 .md-layout
     .md-layout-item
-        form(@submit.prevent='createHotDog')
+        form(@submit.prevent='saveHotDog')
             md-field
                 label(ref='name') Name:
                 md-input(type='text', :name='name', v-model='name', required)
@@ -8,8 +8,7 @@
                 label(ref='price') Price:
                 md-input(type='text', :name='price', v-model='price', required)
             .panel-body
-                md-button.md-raised.md-primary(type='submit' v-if='!updateSubmit') Submit
-                md-button.md-raised.md-accent(v-if="updateSubmit" v-on:click='updateHotDog' ) Save change
+                md-button.md-raised.md-primary(type='submit') {{ saveText }}
     .md-layout-item
         include no-items
         .items-block(v-if='!isEmpty')
@@ -19,7 +18,7 @@
 
             include no-results
 
-            md-card.card(md-with-hover='', v-for='(hotdog, index) in filterHotDogs')
+            md-card.card(md-with-hover v-for="(hotdog, index) in filterHotDogs")
                 md-ripple
                     md-card-header
                         md-card-header-text
@@ -32,6 +31,7 @@
                     md-card-actions
                         md-button.md-raised.md-primary(v-on:click="editHotDog(hotdog)") Edit
                         md-button.md-raised.md-accent(v-on:click="deleteHotDog(hotdog)") Delete
+
     include snackbar
 
 

@@ -1,4 +1,4 @@
-// Test for all the routes.
+// Test for all the server.
 process.env.NODE_ENV = 'test';
 let Hotdog = require('../models/hotdog');
 
