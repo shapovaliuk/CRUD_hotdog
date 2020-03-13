@@ -34,7 +34,7 @@ module.exports.create = async(ctx) => {
     });
 
     if (hotdog.errors) {
-        return ctx.body = { error: 'ValidationError' };
+        ctx.throw(409, 'validationError');
     }
 
     ctx.body = await hotdog.save();

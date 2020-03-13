@@ -4,9 +4,9 @@ let Hotdog = require('../models/hotdog');
 
 //Require the dev-dependencies
 const chai = require('chai');
+const expect = chai.expect;
 const chaiHttp = require('chai-http');
 const server = require('../app');
-const should = chai.should();
 
 chai.use(chaiHttp);
 
@@ -25,25 +25,26 @@ describe('API methods testing', () => {
         chai.request(server)
             .get('/api/hot-dogs')
             .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('array');
-                res.body.length.should.be.eql(0);
+                expect(res.status).eq(200);
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('items');
+                expect(res.body.items).to.have.lengthOf(0);
                 done();
             });
     });
 
     it('method: GET (by given id)', (done) => {
         const hotdog = new Hotdog({name: 'BigDog', price: 15});
-        hotdog.save((err, book) => {
+        hotdog.save((err, hotdog) => {
             chai.request(server)
-                .get('/api/hot-dogs/' + hotdog.id)
-                .send(book)
+                .get(`/api/hot-dogs/${hotdog.id}`)
+                .send(hotdog)
                 .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('name');
-                    res.body.should.have.property('price');
-                    res.body.should.have.property('_id').eql(hotdog.id);
+                    expect(res.status).eq(200);
+                    expect(res.body).to.be.an('object');
+                    expect(res.body).to.have.property('name').eq(hotdog.name);
+                    expect(res.body).to.have.have.property('price').eq(hotdog.price);
+                    expect(res.body).to.have.property('_id').eq(hotdog.id);
                     done();
                 });
         });
@@ -59,10 +60,7 @@ describe('API methods testing', () => {
             .post('/api/hot-dogs')
             .send(hotdog)
             .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('error');
-                res.body.error.should.be.equal('ValidationError');
+                expect(res.status).eq(409);
                 done();
             });
     });
@@ -77,12 +75,12 @@ describe('API methods testing', () => {
             .post('/api/hot-dogs')
             .send(hotdog)
             .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('name');
-                res.body.should.have.property('price');
-                res.body.name.should.be.a('string');
-                res.body.price.should.be.a('number');
+                expect(res.status).eq(200);
+                expect(res.body).to.be.an('object');
+                expect(res.body).to.have.property('name');
+                expect(res.body).to.have.property('price');
+                expect(res.body.name).to.be.a('string');
+                expect(res.body.price).to.be.a('number');
                 done();
             });
     });
@@ -91,13 +89,13 @@ describe('API methods testing', () => {
         const hotdog = new Hotdog({name: 'SmallDog', price: 12});
         hotdog.save((err, hotdog) => {
             chai.request(server)
-                .put('/api/hot-dogs/' + hotdog.id)
+                .put(`/api/hot-dogs/${hotdog.id}`)
                 .send({name: 'BigDog', price: 15})
                 .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('name').eql('BigDog');
-                    res.body.should.have.property('price').eql(15);
+                    expect(res.status).eq(200);
+                    expect(res.body).to.be.an('object');
+                    expect(res.body).to.have.property('name').eq('BigDog');
+                    expect(res.body).to.have.property('price').eq(15);
                     done();
                 });
         });
@@ -107,13 +105,9 @@ describe('API methods testing', () => {
         const hotdog = new Hotdog({name: 'BigDog', price: 15});
         hotdog.save((err, hotdog) => {
             chai.request(server)
-                .delete('/api/hot-dogs/' + hotdog.id)
+                .delete(`/api/hot-dogs/${hotdog.id}`)
                 .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('name').eql('BigDog');
-                    res.body.should.have.property('price').eql(15);
-                    res.body.should.have.property('_id').eql(hotdog.id);
+                    expect(res.status).eq(204);
                     done();
                 });
         });
