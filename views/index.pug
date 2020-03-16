@@ -19,6 +19,14 @@ body
         md-app-content.main-layout
             .container.md-5
                 include components/content
+    paginate(
+        :page-count="totalPages"
+        :force-page="page"
+        :prev-text="'<'"
+        :next-text="'>'"
+        :click-handler="changePage"
+        :container-class="'pagination'"
+    )
 
 script(src='https://unpkg.com/axios/dist/axios.min.js')
 script(src='https://cdn.jsdelivr.net/npm/vue' )

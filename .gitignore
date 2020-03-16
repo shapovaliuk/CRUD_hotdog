@@ -5,6 +5,7 @@ package-lock.json
 # Unknown
 npm-debug.log
 .env
+/dist
 
 # DB store
 .DS_Store

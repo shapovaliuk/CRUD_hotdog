@@ -2,6 +2,9 @@ Vue.use(VueMaterial.default);
 
 new Vue({
     el: '#app',
+    components: {
+        paginate: VuejsPaginate
+    },
 
     data: () => ({
         allHotDogs: [],
@@ -20,7 +23,8 @@ new Vue({
         duration: 4000,
         isInfinity: false,
 
-        page: null
+        page: null,
+        totalPages: null
     }),
 
     created: function() {
@@ -62,6 +66,7 @@ new Vue({
                 if (res.data) {
                     this.allHotDogs = res.data.items;
                     this.page = res.data.page;
+                    this.totalPages = res.data.totalPages;
                 }
             }).catch(err => {
                 if (err.response) {
