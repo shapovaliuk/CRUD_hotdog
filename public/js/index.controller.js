@@ -1,9 +1,33 @@
 Vue.use(VueMaterial.default);
 
+const ComponentBase = Vue.extend({
+    data: () => ({
+       message: 'Test message'
+    }),
+    methods: {
+        someAlert() {
+            alert('Here!!!');
+        }
+    }
+});
+
+const Component = ComponentBase.extend({
+    template: '<button @click="someAlert">{{ message }}</button>',
+    data: () => ({}),
+    methods: {
+        // someAlert() {
+        //     console.log('here');
+        // }
+    }
+});
+
+Vue.component('Component', Component);
+
 new Vue({
     el: '#app',
     components: {
-        paginate: VuejsPaginate
+        paginate: VuejsPaginate,
+        Component
     },
 
     data: () => ({

@@ -11,12 +11,16 @@ const app = new Koa();
 const pug = new Pug({
     viewPath: './views',
     basedir: './views',
-    app: app
+    app
 });
 
-app.use(serve(__dirname + '/public'));
+app.use(serve(__dirname + '/dist'));
 app.use(bodyParser());
 app.use(logger());
+
+router.get('*', async (ctx) => {
+    console.log(ctx.request);
+});
 
 mongoose.connect(process.env.MONGODB_URI || config.db.connectionString,
     {useNewUrlParser: true}, function(err) {

@@ -11,7 +11,7 @@ link(rel='stylesheet', href='https://unpkg.com/vue-material/dist/vue-material.mi
 link(rel='stylesheet', href='https://unpkg.com/vue-material/dist/theme/default.css')
 script(src='https://unpkg.com/vuejs-paginate@latest')
 
-link(rel='stylesheet'  href='css/style.css')
+link(rel='stylesheet'  href='css/style.min.css')
 body
 #app
     md-app(md-waterfall md-mode="fixed")
@@ -28,8 +28,10 @@ body
         :container-class="'pagination'"
     )
 
+    component
+
 script(src='https://unpkg.com/axios/dist/axios.min.js')
 script(src='https://cdn.jsdelivr.net/npm/vue' )
 script(src="https://unpkg.com/vue-material")
-script(type='module' defer src='js/index.controller.js')
+//script(type='module' defer src='js/index.controller.js')
 
