@@ -1,73 +1,56 @@
-$redColor: #ff5252;
-
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: darkblue;
 }
 
-.card {
+.card{
     margin-bottom: 10px;
     background: url("../img/m-bg.png");
 }
 
 body,
-.main-layout {
+.main-layout{
     background: url('../img/first_bg.gif');
 }
 
-.empty-block {
+.empty-block{
     width: 300px;
     height: 300px;
 }
 
-.items-block {
+.items-block{
     margin-left: 10px;
 }
 .pagination {
     display: flex;
     justify-content: center;
 }
-.pagination {
-    display: flex;
-    justify-content: center;
 
-    li {
-        a {
-            color: $redColor;
-            width: 20px;
-            background-color: #232323;
-            border: 1px solid #000;
-
-            &:hover {
-                color: $redColor;
-                background-color: #101010;
-            }
-        }
-
-        &.active a {
-            color: #000;
-            background-color: blue;
-            border-color: $redColor;
-        }
-
-        &.active a:hover {
-            color: #000;
-            background-color: $redColor;
-            border-color: $redColor;
-        }
-
-        &.disabled a {
-            color: #777;
-            background-color: #232323;
-            border-color: #000;
-        }
-    }
+.pagination li a {
+    color: #ff5252;
+    width: 20px;
+    background-color: #232323;
+    border: 1px solid #000;
 }
-
-* {
-    transition: all .5s ease-in-out;
+.pagination li a:hover {
+    color: #fb6161;
+    background-color: #101010;
+}
+.pagination li.active a {
+    color: #000;
+    background-color: blue;
+    border-color: #ff5252;
+}
+.pagination li.active a:hover {
+    color: #000;
+    background-color: #ff5252;
+    border-color: #ff5252;
+}
+.pagination li.disabled a {
+    color: #777;
+    background-color: #232323;
+    border-color: #000;
 }
 
 
